@@ -1,0 +1,10 @@
+# About Me
+
+Description TBC
+
+### Stack
+- Python (pandas, scikit-learn, xgboost)
+- SQL
+- ML supervisé / non supervisé
+- Data viz (matplotlib, seaborn)
+- TBC...
