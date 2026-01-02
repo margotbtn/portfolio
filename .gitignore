@@ -25,3 +25,6 @@ Thumbs.db
 
 # Docker (optionnel)
 Dockerfile
+
+/.quarto/
+**/*.quarto_ipynb
