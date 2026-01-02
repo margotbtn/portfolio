@@ -1,0 +1,15 @@
+## À propos
+
+Data scientist avec X années d’expérience, j’interviens sur l’ensemble du cycle data :
+- cadrage business
+- exploration & feature engineering
+- modélisation
+- interprétation & recommandations
+
+### Stack
+- Python (pandas, scikit-learn, xgboost)
+- SQL
+- ML supervisé / non supervisé
+- Data viz (matplotlib, seaborn)
+
+🎯 Objectif : poste de data scientist orienté impact business.
