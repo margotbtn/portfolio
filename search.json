@@ -4,62 +4,69 @@
     "href": "about.html",
     "title": "About Me",
     "section": "",
-    "text": "About Me\nDescription TBC\n\nStack\n\nPython (pandas, scikit-learn, xgboost)\nSQL\nML supervisé / non supervisé\nData viz (matplotlib, seaborn)\nTBC…"
+    "text": "About Me\nTODO"
   },
   {
     "objectID": "projects/project1.html",
     "href": "projects/project1.html",
-    "title": "Margot Berton | Data Scientist",
+    "title": "Margot Berton",
     "section": "",
     "text": "TODO"
   },
   {
     "objectID": "projects/project1.html#project-1",
     "href": "projects/project1.html#project-1",
-    "title": "Margot Berton | Data Scientist",
+    "title": "Margot Berton",
     "section": "",
     "text": "TODO"
   },
   {
     "objectID": "projects/project3.html",
     "href": "projects/project3.html",
-    "title": "Margot Berton | Data Scientist",
+    "title": "Margot Berton",
     "section": "",
     "text": "TODO"
   },
   {
     "objectID": "projects/project3.html#project-3",
     "href": "projects/project3.html#project-3",
-    "title": "Margot Berton | Data Scientist",
+    "title": "Margot Berton",
     "section": "",
     "text": "TODO"
   },
   {
     "objectID": "projects/project2.html",
     "href": "projects/project2.html",
-    "title": "Margot Berton | Data Scientist",
+    "title": "Margot Berton",
     "section": "",
     "text": "TODO"
   },
   {
     "objectID": "projects/project2.html#project-2",
     "href": "projects/project2.html#project-2",
-    "title": "Margot Berton | Data Scientist",
+    "title": "Margot Berton",
     "section": "",
     "text": "TODO"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Margot Berton | Data Scientist",
+    "title": "Hello, my name is Margot Berton",
     "section": "",
-    "text": "Je transforme des données complexes en décisions actionnables.\nSpécialisée en machine learning, modélisation prédictive et data storytelling.\n\n\n\n\nProject 1\nKeywords\n👉 Voir le Projets"
+    "text": "I am a data scientist at BNP Paribas – Montréal.\n\nPython Machine Learning LLM"
   },
   {
-    "objectID": "index.html#data-scientist",
-    "href": "index.html#data-scientist",
-    "title": "Margot Berton | Data Scientist",
-    "section": "",
-    "text": "Je transforme des données complexes en décisions actionnables.\nSpécialisée en machine learning, modélisation prédictive et data storytelling.\n\n\n\n\nProject 1\nKeywords\n👉 Voir le Projets"
+    "objectID": "index.html#selected-projects",
+    "href": "index.html#selected-projects",
+    "title": "Hello, my name is Margot Berton",
+    "section": "Selected projects",
+    "text": "Selected projects\n\n\n\nProject 1\nShort description of what the project does and why it matters.\nView project →\n\n\nProject 2\nAnother concise description, focusing on impact or techniques used.\nView project →\n\n\nProject 3\nOptional third project.\nView project →"
+  },
+  {
+    "objectID": "index.html#contact",
+    "href": "index.html#contact",
+    "title": "Hello, my name is Margot Berton",
+    "section": "Contact",
+    "text": "Contact\n\n\n Name  \n Email  \n Message\n\n\n Send"
   }
 ]

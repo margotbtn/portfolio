@@ -1,0 +1,171 @@
+/* =========================================================
+   Design tokens / theme variables
+   Centralized colors for easy theming and consistency
+   ========================================================= */
+
+:root {
+  --brand: #1f6feb;
+  --muted: #6b7280;
+}
+
+/* =========================================================
+   Hero section (homepage introduction)
+   ========================================================= */
+
+.hero {
+  text-align: center;
+  max-width: 720px;
+  margin: 3rem auto 2.5rem;
+  padding: 0 1rem;
+}
+
+.hero h1 {
+  /* Slightly tighter heading for better visual balance */
+  line-height: 1.2;
+}
+
+.profile {
+  /* Circular profile image with subtle elevation */
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.12);
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.subtitle {
+  color: var(--muted);
+  margin: 0.2rem 0 0.6rem 0;
+}
+
+/* =========================================================
+   Reusable UI elements (tags, buttons)
+   ========================================================= */
+
+.tag {
+  display: inline-block;
+  background: var(--brand);
+  color: #fff;
+  padding: 0.28rem 0.6rem;
+  border-radius: 999px;
+  margin: 0 0.25rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.button {
+  display: inline-block;
+  background: var(--brand);
+  color: #fff;
+  padding: 0.45rem 0.9rem;
+  border-radius: 6px;
+  text-decoration: none;
+  margin: 0.35rem;
+}
+
+.button.outline {
+  background: transparent;
+  border: 1px solid var(--brand);
+  color: var(--brand);
+}
+
+/* =========================================================
+   Responsive adjustments (hero section)
+   ========================================================= */
+
+@media (min-width: 900px) {
+  .hero {
+    margin-top: 5rem;
+  }
+
+  .profile {
+    width: 220px;
+    height: 220px;
+  }
+}
+
+/* =========================================================
+   Contact form
+   Minimal styling to improve readability while
+   respecting the Quarto theme defaults
+   ========================================================= */
+
+form {
+  max-width: 480px;
+  margin: 2rem auto;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+input,
+textarea {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* =========================================================
+   Project listing (card-based layout)
+   ========================================================= */
+
+.projects {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.project-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.25rem 1.4rem;
+  background: #fff;
+
+  /* Subtle interaction feedback */
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+}
+
+.project-card h3 {
+  margin-top: 0;
+  margin-bottom: 0.4rem;
+}
+
+.project-card p {
+  color: var(--muted);
+  margin-bottom: 0.8rem;
+}
+
+.project-link {
+  color: var(--brand);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.project-link:hover {
+  text-decoration: underline;
+}
+
+/* Two-column layout on larger screens */
+@media (min-width: 700px) {
+  .projects {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* =========================================================
+   Intentionally minimal overrides to avoid conflicts
+   with the Quarto theme defaults
+   ========================================================= */
