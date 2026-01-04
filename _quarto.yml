@@ -3,8 +3,8 @@ project:
 
 website:
   title: "Margot Berton"
-  site-url: https://margotbtn.github.io # To comment to test locally
-  site-path: /portfolio/ # To comment to test locally
+  site-url: https://margotbtn.github.io
+  site-path: /portfolio/
   navbar:
     left:
       - href: index.qmd
