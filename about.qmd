@@ -1,3 +1,42 @@
 # About Me
 
-TODO
+I'm a data scientist working on applied ML and AI systems, currently based in Montréal.
+I enjoy building robust, practical solutions and increasingly reflecting on how data and AI are used
+to support meaningful, real-world decisions.
+
+
+## How I approach problems
+
+I care a lot about:
+
+- Understanding the context behind the data before modeling
+- Building solutions that are robust, interpretable, and useful in practice
+- Communicating uncertainty, limitations, and trade-offs clearly
+- Writing clean, reproducible code and documenting decisions  
+- Thinking beyond model performance to consider downstream usage and impact
+
+
+## What I work on
+ 
+- Building end-to-end data pipelines, from raw data to deployed machine learning systems  
+- Designing and evaluating generative AI systems, including LLM-based and retrieval-augmented approaches, for practical use cases
+- Communicating results and recommendations clearly to both technical and non-technical stakeholders  
+- Contributing to projects where data supports decision-making at scale
+
+
+## Tools & technologies
+
+- **Languages**: Python, SQL  
+- **Data & Machine Learning**: pandas, scikit-learn, PyTorch  
+- **LLM-based systems**: retrieval-augmented generation, LangChain  
+- **MLOps & Infrastructure**: Docker, Git, cloud-based workflows (GCP, AWS)  
+- **Visualization**: matplotlib, seaborn
+
+
+## Resume
+
+Want to learn more about my background and experience? You can find my resume below:
+
+<a href="files/Margot_Berton_CV.pdf" class="button" download>
+  Download my resume (PDF)
+</a>

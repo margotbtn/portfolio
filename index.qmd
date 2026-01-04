@@ -6,14 +6,15 @@
 
 ![](images/profile.jpg){.profile alt="Margot Berton"}
 
-# Hello, my name is Margot Berton
+# Margot Berton | Data Scientist
 
-[I am a data scientist at BNP Paribas – Montréal.]{.subtitle}
+[Currently working in AI/ML at BNP Paribas – Montréal]{.subtitle}
 
 <!-- Core skills / focus areas -->
 [Python]{.tag}
-[Machine Learning]{.tag}
-[LLM]{.tag}
+[Applied Machine Learning]{.tag}
+[Model Interpretability]{.tag}
+[AI & Societal Impact]{.tag}
 
 :::
 
@@ -67,6 +68,9 @@ Optional third project.
   Styling is intentionally minimal to stay consistent
   with the site theme.
 -->
+
+I'm always happy to discuss data science, applied machine learning, and how
+AI systems can be designed with real-world and societal considerations in mind.
 
 <form action="https://formspree.io/f/xojvpqlb" method="POST">
 

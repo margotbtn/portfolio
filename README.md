@@ -32,6 +32,7 @@ The website is built with **Quarto** and automatically deployed via **GitHub Pag
 
 ## 📁 Repository structure
 
+```text
 .
 ├── index.qmd # Home page
 ├── about.qmd # About page
@@ -39,8 +40,10 @@ The website is built with **Quarto** and automatically deployed via **GitHub Pag
 ├── _quarto.yml # Website configuration
 ├── styles.css # Custom CSS styles
 └── images/ # Images and visual assets
+└── files/ # Documents that can be downloaded
 ├── _site/ # Rendered site (generated)
 └── .github/workflows/ # GitHub Actions (deployment)
+```
 
 
 ---
