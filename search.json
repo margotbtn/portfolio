@@ -4,7 +4,35 @@
     "href": "about.html",
     "title": "About Me",
     "section": "",
-    "text": "About Me\nTODO"
+    "text": "I’m a data scientist working on applied ML and AI systems, currently based in Montréal. I enjoy building robust, practical solutions and increasingly reflecting on how data and AI are used to support meaningful, real-world decisions.\n\n\nI care a lot about:\n\nUnderstanding the context behind the data before modeling\nBuilding solutions that are robust, interpretable, and useful in practice\nCommunicating uncertainty, limitations, and trade-offs clearly\nWriting clean, reproducible code and documenting decisions\n\nThinking beyond model performance to consider downstream usage and impact\n\n\n\n\n\nBuilding end-to-end data pipelines, from raw data to deployed machine learning systems\n\nDesigning and evaluating generative AI systems, including LLM-based and retrieval-augmented approaches, for practical use cases\nCommunicating results and recommendations clearly to both technical and non-technical stakeholders\n\nContributing to projects where data supports decision-making at scale\n\n\n\n\n\nLanguages: Python, SQL\n\nData & Machine Learning: pandas, scikit-learn, PyTorch\n\nLLM-based systems: retrieval-augmented generation, LangChain\n\nMLOps & Infrastructure: Docker, Git, cloud-based workflows (GCP, AWS)\n\nVisualization: matplotlib, seaborn\n\n\n\n\nWant to learn more about my background and experience? You can find my resume below:\n Download my resume (PDF)"
+  },
+  {
+    "objectID": "about.html#how-i-approach-problems",
+    "href": "about.html#how-i-approach-problems",
+    "title": "About Me",
+    "section": "",
+    "text": "I care a lot about:\n\nUnderstanding the context behind the data before modeling\nBuilding solutions that are robust, interpretable, and useful in practice\nCommunicating uncertainty, limitations, and trade-offs clearly\nWriting clean, reproducible code and documenting decisions\n\nThinking beyond model performance to consider downstream usage and impact"
+  },
+  {
+    "objectID": "about.html#what-i-work-on",
+    "href": "about.html#what-i-work-on",
+    "title": "About Me",
+    "section": "",
+    "text": "Building end-to-end data pipelines, from raw data to deployed machine learning systems\n\nDesigning and evaluating generative AI systems, including LLM-based and retrieval-augmented approaches, for practical use cases\nCommunicating results and recommendations clearly to both technical and non-technical stakeholders\n\nContributing to projects where data supports decision-making at scale"
+  },
+  {
+    "objectID": "about.html#tools-technologies",
+    "href": "about.html#tools-technologies",
+    "title": "About Me",
+    "section": "",
+    "text": "Languages: Python, SQL\n\nData & Machine Learning: pandas, scikit-learn, PyTorch\n\nLLM-based systems: retrieval-augmented generation, LangChain\n\nMLOps & Infrastructure: Docker, Git, cloud-based workflows (GCP, AWS)\n\nVisualization: matplotlib, seaborn"
+  },
+  {
+    "objectID": "about.html#resume",
+    "href": "about.html#resume",
+    "title": "About Me",
+    "section": "",
+    "text": "Want to learn more about my background and experience? You can find my resume below:\n Download my resume (PDF)"
   },
   {
     "objectID": "projects/project1.html",
@@ -51,22 +79,22 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Hello, my name is Margot Berton",
+    "title": "Margot Berton | Data Scientist",
     "section": "",
-    "text": "I am a data scientist at BNP Paribas – Montréal.\n\nPython Machine Learning LLM"
+    "text": "Currently working in AI/ML at BNP Paribas – Montréal\n\nPython Applied Machine Learning Model Interpretability AI & Societal Impact"
   },
   {
     "objectID": "index.html#selected-projects",
     "href": "index.html#selected-projects",
-    "title": "Hello, my name is Margot Berton",
+    "title": "Margot Berton | Data Scientist",
     "section": "Selected projects",
     "text": "Selected projects\n\n\n\nProject 1\nShort description of what the project does and why it matters.\nView project →\n\n\nProject 2\nAnother concise description, focusing on impact or techniques used.\nView project →\n\n\nProject 3\nOptional third project.\nView project →"
   },
   {
     "objectID": "index.html#contact",
     "href": "index.html#contact",
-    "title": "Hello, my name is Margot Berton",
+    "title": "Margot Berton | Data Scientist",
     "section": "Contact",
-    "text": "Contact\n\n\n Name  \n Email  \n Message\n\n\n Send"
+    "text": "Contact\n\nI’m always happy to discuss data science, applied machine learning, and how AI systems can be designed with real-world and societal considerations in mind.\n\n Name  \n Email  \n Message\n\n\n Send"
   }
 ]
