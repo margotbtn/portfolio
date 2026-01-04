@@ -1,12 +1,91 @@
-## Data Scientist
+<!-- =====================================================
+     Homepage hero / introduction
+     ===================================================== -->
 
-Je transforme des données complexes en décisions actionnables.  
-Spécialisée en **machine learning**, **modélisation prédictive** et **data storytelling**.
+::: {.hero}
 
----
+![](images/profile.jpg){.profile alt="Margot Berton"}
 
-### Projets sélectionnés
+# Hello, my name is Margot Berton
 
-- **Project 1**  
-  Keywords  
-  👉 Voir le Projets
+[I am a data scientist at BNP Paribas – Montréal.]{.subtitle}
+
+<!-- Core skills / focus areas -->
+[Python]{.tag}
+[Machine Learning]{.tag}
+[LLM]{.tag}
+
+:::
+
+<!-- =====================================================
+     Selected projects
+     ===================================================== -->
+
+## Selected projects
+
+<!--
+  Card-based project layout.
+  Each project follows the same internal structure:
+  - Title
+  - Short description
+  - Primary action link
+-->
+
+::: {.projects}
+
+::: {.project-card}
+### Project 1
+Short description of what the project does and why it matters.
+
+[View project →](projects/project1.html){.project-link}
+:::
+
+::: {.project-card}
+### Project 2
+Another concise description, focusing on impact or techniques used.
+
+[View project →](projects/project2.html){.project-link}
+:::
+
+::: {.project-card}
+### Project 3
+Optional third project.
+
+[View project →](projects/project3.html){.project-link}
+:::
+
+:::
+
+<!-- =====================================================
+     Contact section
+     ===================================================== -->
+
+## Contact
+
+<!--
+  Simple contact form powered by Formspree.
+  Styling is intentionally minimal to stay consistent
+  with the site theme.
+-->
+
+<form action="https://formspree.io/f/xojvpqlb" method="POST">
+
+  <label>
+    Name
+    <input type="text" name="name" required>
+  </label>
+
+  <label>
+    Email
+    <input type="email" name="email" required>
+  </label>
+
+  <label>
+    Message
+    <textarea name="message" required></textarea>
+  </label>
+
+  <!-- Reuses global button styling -->
+  <button type="submit" class="button">Send</button>
+
+</form>
