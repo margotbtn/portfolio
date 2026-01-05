@@ -38,6 +38,6 @@ I care a lot about:
 
 Want to learn more about my background and experience? You can find my resume below:
 
-<a href="files/Margot_Berton_CV.pdf" class="button" download>
+<a href="files/Margot_Berton_resume_EN.pdf" class="button" download>
   Download my resume (PDF)
 </a>
