@@ -13,17 +13,19 @@ website:
         text: About
       - text: Projects
         menu:
-          - href: projects/project1.qmd
-            text: Project 1
+          - href: projects/nli-shortcut-learning.qmd
+            text: Shortcut Learning in NLI
           - href: projects/project2.qmd
             text: Project 2
           - href: projects/project3.qmd
             text: Project 3
     right:
-      - text: '<img src="images/icons/github-svgrepo-com.svg" width="24">'
+      - icon: github
         href: https://github.com/margotbtn/
-      - text: '<img src="images/icons/linkedin-svgrepo-com.svg" width="24">'
+        aria-label: GitHub
+      - icon: linkedin
         href: https://www.linkedin.com/in/margot-berton/
+        aria-label: LinkedIn
   search: false
 
 format:

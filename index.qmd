@@ -35,10 +35,10 @@
 ::: {.projects}
 
 ::: {.project-card}
-### Project 1
-Short description of what the project does and why it matters.
+### Shortcut Learning in NLI
+Can a model ace a language benchmark without understanding language? An empirical and mechanistic analysis of annotation artifacts in SNLI, using hypothesis-only ablations, lift analysis, and Integrated Gradients.
 
-[View project →](projects/project1.html){.project-link}
+[View project →](projects/nli-shortcut-learning.html){.project-link}
 :::
 
 ::: {.project-card}

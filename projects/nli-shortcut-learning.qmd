@@ -1,0 +1,114 @@
+---
+title: "Shortcut Learning in NLI"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+---
+
+**Can a model ace a language reasoning benchmark without understanding language?**
+This project investigates shortcut learning in Natural Language Inference (NLI),
+showing that BERT achieves 71% accuracy on SNLI *using only the hypothesis* — no premise required —
+and that these shortcuts are mechanistically verifiable through gradient-based attribution.
+
+::: {style="margin: 1.5rem 0;"}
+[View on GitHub →](https://github.com/margotbtn/nli-shortcut-learning){.button}
+:::
+
+## Context
+
+Natural Language Inference is the task of determining whether a *hypothesis* follows from a *premise*
+(*entailment*), contradicts it (*contradiction*), or is unrelated (*neutral*).
+SNLI, the standard benchmark, contains 550k annotated sentence pairs collected via crowdsourcing.
+A BERT model fine-tuned on SNLI reaches ~90% accuracy, commonly cited as evidence of strong language understanding.
+
+This project asks a different question: **how much of that performance reflects genuine reasoning,
+and how much reflects annotation artifacts exploitable without reading the premise?**
+
+## Method
+
+Four experimental phases, each building on the previous:
+
+### 1 · Pair model baseline
+Fine-tuned `bert-base-uncased` on SNLI with standard premise + hypothesis input.
+Reached **90.34% accuracy** on the SNLI validation set — consistent with published results.
+
+### 2 · Hypothesis-only ablation
+Trained an identical model using **only the hypothesis** (premise dropped entirely).
+Result: **70.91% accuracy** — far above the 33.3% chance baseline.
+
+This single number is the central finding: ~66% of above-chance performance is replicable
+without the premise.
+
+$(70.9 − 33.3) / (90.3 − 33.3) \approx 0.66$
+
+### 3 · Shortcut identification
+
+**Lexical shortcuts (lift analysis).**
+For each (token, label) pair across 549k training hypotheses, $lift = P(label | token) / P(label)$.
+2,362 tokens retained after stopword filtering and a minimum count of 100:
+
+| Label         | Token        | Lift | P(label \| token) |
+|---------------|--------------|------|-------------------|
+| Entailment    | least        | 3.07 | 92.5%             |
+| Neutral       | championship | 2.59 | 95.0%             |
+| Contradiction | nobody       | 3.00 | 99.5%             |
+
+**Structural shortcuts.**
+Four surface features (hypothesis length, premise–hypothesis overlap, Jaccard) alone achieve
+**49% accuracy** in logistic regression cross-validation — 15.7 pp above chance, with no semantic understanding.
+
+**Token attribution (Integrated Gradients).**
+IG attributions computed for 500 validation examples (4,152 token records) show that
+the model allocates more weight to statistically predictive tokens:
+
+| Evidence                   | Result                              |
+|----------------------------|-------------------------------------|
+| Shortcut vs. other tokens  | Mean \|attr\|: 0.398 vs 0.288 — **1.38× higher** |
+| Attribution by lift bin    | 0.288 (low) → 0.800 (high) — **2.8× gradient**   |
+| Spearman ρ (lift vs. attr) | **0.281**, p = 4.95e-05             |
+
+### 4 · Anti-shortcut evaluation
+
+Both models evaluated on three splits that neutralize lexical shortcuts:
+
+| Split            | n      | Pair    | Hyp-only | Pair drop | Hyp-only drop |
+|------------------|--------|---------|----------|-----------|---------------|
+| SNLI validation  | 9,842  | 90.34%  | 70.91%   | —         | —             |
+| HANS (OOD)       | 30,000 | 59.39%  | 51.62%   | −30.95 pp | −19.29 pp     |
+| SNLI Filtered    | 795    | 89.56%  | 48.18%   | −0.78 pp  | −22.73 pp     |
+| SNLI Paraphrased | 1,235  | 68.91%  | 44.37%   | −21.43 pp | −26.54 pp     |
+
+**SNLI Filtered** removes all examples with any token of lift > 1.2.
+The pair model drops only −0.78 pp (genuine reasoning capacity intact).
+The hypothesis-only model drops −22.73 pp — a **29× larger drop** — confirming that
+lexical shortcuts drove most of its above-chance performance.
+
+**HANS** exposes an entailment bias in the pair model: 99.1% entailment recall
+but only 19.68% non-entailment recall, because SNLI training over-represents
+high-overlap entailment examples.
+
+## Key Findings
+
+1. **~66% of above-chance SNLI performance is replicable without the premise**, by exploiting annotation artifacts in the hypothesis alone.
+2. **Shortcuts are statistically extreme**: *nobody* predicts *contradiction* with 99.5% probability; four surface features achieve 49% accuracy.
+3. **The model has mechanistically internalized the shortcuts**: IG attribution is 2.8× higher for strong-shortcut tokens, with a significant rank correlation between lift and attribution (ρ = 0.281, p < 1e-4).
+4. **Removing shortcuts collapses the hypothesis-only model**: from 70.91% to 48.18% on the filtered split (near chance on neutral and contradiction), while the pair model holds at 89.56%.
+5. **High benchmark scores mask genuine capability gaps**: the pair model's 90.34% standard accuracy hides both its shortcut dependence and a structural HANS entailment bias.
+
+## Relevance to AI Safety
+
+This project is a concrete, reproducible demonstration of **goal misgeneralization**:
+
+- The *intended* objective is semantic inference between sentences.
+- The *learned* objective is hypothesis-side shortcut exploitation.
+
+The IG analysis makes this mechanistic rather than merely correlational: the model does not just *benefit* from shortcuts at the distributional level — it has *internalized* them as its primary decision rule. This has direct implications for:
+
+- **Evaluation reliability** — standard benchmark accuracy does not distinguish genuine reasoning from artifact exploitation.
+- **Robustness under distribution shift** — shortcuts break when annotation artifacts are neutralized, as the anti-shortcut splits demonstrate.
+- **Capability elicitation** — the pair model's robustness on SNLI Filtered (−0.78 pp) shows that genuine reasoning capacity exists but is masked by easier shortcut strategies under standard training.
+
+## Stack
+
+`Python` · `PyTorch` · `Hugging Face Transformers` · `Captum` · `NLTK` · `scikit-learn` · `pandas` · `matplotlib` · `seaborn`
