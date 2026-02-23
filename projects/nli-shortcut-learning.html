@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>project1 – Margot Berton</title>
+<title>Shortcut Learning in NLI – Margot Berton</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -53,11 +53,40 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -87,8 +116,8 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-projects">    
         <li>
-    <a class="dropdown-item" href="../projects/project1.html">
- <span class="dropdown-text">Project 1</span></a>
+    <a class="dropdown-item" href="../projects/nli-shortcut-learning.html">
+ <span class="dropdown-text">Shortcut Learning in NLI</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../projects/project2.html">
@@ -102,13 +131,15 @@ ul.task-list li input[type="checkbox"] {
   </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="https://github.com/margotbtn/"> 
-<span class="menu-text"><img src="images/icons/github-svgrepo-com.svg" width="24"></span></a>
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/margotbtn/"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://www.linkedin.com/in/margot-berton/"> 
-<span class="menu-text"><img src="images/icons/linkedin-svgrepo-com.svg" width="24"></span></a>
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/margot-berton/"> <i class="bi bi-linkedin" role="img" aria-label="LinkedIn">
+</i> 
+<span class="menu-text"></span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -121,16 +152,213 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#context" id="toc-context" class="nav-link active" data-scroll-target="#context">Context</a></li>
+  <li><a href="#method" id="toc-method" class="nav-link" data-scroll-target="#method">Method</a></li>
+  <li><a href="#key-findings" id="toc-key-findings" class="nav-link" data-scroll-target="#key-findings">Key Findings</a></li>
+  <li><a href="#relevance-to-ai-safety" id="toc-relevance-to-ai-safety" class="nav-link" data-scroll-target="#relevance-to-ai-safety">Relevance to AI Safety</a></li>
+  <li><a href="#stack" id="toc-stack" class="nav-link" data-scroll-target="#stack">Stack</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Shortcut Learning in NLI</h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
 
-<section id="project-1" class="level2">
-<h2 class="anchored" data-anchor-id="project-1">Project 1</h2>
-<p>TODO</p>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>Can a model ace a language reasoning benchmark without understanding language?</strong> This project investigates shortcut learning in Natural Language Inference (NLI), showing that BERT achieves 71% accuracy on SNLI <em>using only the hypothesis</em> — no premise required — and that these shortcuts are mechanistically verifiable through gradient-based attribution.</p>
+<div style="margin: 1.5rem 0;">
+<p><a href="https://github.com/margotbtn/nli-shortcut-learning" class="button">View on GitHub →</a></p>
+</div>
+<section id="context" class="level2">
+<h2 class="anchored" data-anchor-id="context">Context</h2>
+<p>Natural Language Inference is the task of determining whether a <em>hypothesis</em> follows from a <em>premise</em> (<em>entailment</em>), contradicts it (<em>contradiction</em>), or is unrelated (<em>neutral</em>). SNLI, the standard benchmark, contains 550k annotated sentence pairs collected via crowdsourcing. A BERT model fine-tuned on SNLI reaches ~90% accuracy, commonly cited as evidence of strong language understanding.</p>
+<p>This project asks a different question: <strong>how much of that performance reflects genuine reasoning, and how much reflects annotation artifacts exploitable without reading the premise?</strong></p>
+</section>
+<section id="method" class="level2">
+<h2 class="anchored" data-anchor-id="method">Method</h2>
+<p>Four experimental phases, each building on the previous:</p>
+<section id="pair-model-baseline" class="level3">
+<h3 class="anchored" data-anchor-id="pair-model-baseline">1 · Pair model baseline</h3>
+<p>Fine-tuned <code>bert-base-uncased</code> on SNLI with standard premise + hypothesis input. Reached <strong>90.34% accuracy</strong> on the SNLI validation set — consistent with published results.</p>
+</section>
+<section id="hypothesis-only-ablation" class="level3">
+<h3 class="anchored" data-anchor-id="hypothesis-only-ablation">2 · Hypothesis-only ablation</h3>
+<p>Trained an identical model using <strong>only the hypothesis</strong> (premise dropped entirely). Result: <strong>70.91% accuracy</strong> — far above the 33.3% chance baseline.</p>
+<p>This single number is the central finding: ~66% of above-chance performance is replicable without the premise.</p>
+<p><span class="math inline">\((70.9 − 33.3) / (90.3 − 33.3) \approx 0.66\)</span></p>
+</section>
+<section id="shortcut-identification" class="level3">
+<h3 class="anchored" data-anchor-id="shortcut-identification">3 · Shortcut identification</h3>
+<p><strong>Lexical shortcuts (lift analysis).</strong> For each (token, label) pair across 549k training hypotheses, <span class="math inline">\(lift = P(label | token) / P(label)\)</span>. 2,362 tokens retained after stopword filtering and a minimum count of 100:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Label</th>
+<th>Token</th>
+<th>Lift</th>
+<th>P(label | token)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Entailment</td>
+<td>least</td>
+<td>3.07</td>
+<td>92.5%</td>
+</tr>
+<tr class="even">
+<td>Neutral</td>
+<td>championship</td>
+<td>2.59</td>
+<td>95.0%</td>
+</tr>
+<tr class="odd">
+<td>Contradiction</td>
+<td>nobody</td>
+<td>3.00</td>
+<td>99.5%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Structural shortcuts.</strong> Four surface features (hypothesis length, premise–hypothesis overlap, Jaccard) alone achieve <strong>49% accuracy</strong> in logistic regression cross-validation — 15.7 pp above chance, with no semantic understanding.</p>
+<p><strong>Token attribution (Integrated Gradients).</strong> IG attributions computed for 500 validation examples (4,152 token records) show that the model allocates more weight to statistically predictive tokens:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 43%">
+<col style="width: 56%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Evidence</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Shortcut vs.&nbsp;other tokens</td>
+<td>Mean |attr|: 0.398 vs 0.288 — <strong>1.38× higher</strong></td>
+</tr>
+<tr class="even">
+<td>Attribution by lift bin</td>
+<td>0.288 (low) → 0.800 (high) — <strong>2.8× gradient</strong></td>
+</tr>
+<tr class="odd">
+<td>Spearman ρ (lift vs.&nbsp;attr)</td>
+<td><strong>0.281</strong>, p = 4.95e-05</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="anti-shortcut-evaluation" class="level3">
+<h3 class="anchored" data-anchor-id="anti-shortcut-evaluation">4 · Anti-shortcut evaluation</h3>
+<p>Both models evaluated on three splits that neutralize lexical shortcuts:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 11%">
+<col style="width: 12%">
+<col style="width: 14%">
+<col style="width: 15%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Split</th>
+<th>n</th>
+<th>Pair</th>
+<th>Hyp-only</th>
+<th>Pair drop</th>
+<th>Hyp-only drop</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>SNLI validation</td>
+<td>9,842</td>
+<td>90.34%</td>
+<td>70.91%</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>HANS (OOD)</td>
+<td>30,000</td>
+<td>59.39%</td>
+<td>51.62%</td>
+<td>−30.95 pp</td>
+<td>−19.29 pp</td>
+</tr>
+<tr class="odd">
+<td>SNLI Filtered</td>
+<td>795</td>
+<td>89.56%</td>
+<td>48.18%</td>
+<td>−0.78 pp</td>
+<td>−22.73 pp</td>
+</tr>
+<tr class="even">
+<td>SNLI Paraphrased</td>
+<td>1,235</td>
+<td>68.91%</td>
+<td>44.37%</td>
+<td>−21.43 pp</td>
+<td>−26.54 pp</td>
+</tr>
+</tbody>
+</table>
+<p><strong>SNLI Filtered</strong> removes all examples with any token of lift &gt; 1.2. The pair model drops only −0.78 pp (genuine reasoning capacity intact). The hypothesis-only model drops −22.73 pp — a <strong>29× larger drop</strong> — confirming that lexical shortcuts drove most of its above-chance performance.</p>
+<p><strong>HANS</strong> exposes an entailment bias in the pair model: 99.1% entailment recall but only 19.68% non-entailment recall, because SNLI training over-represents high-overlap entailment examples.</p>
+</section>
+</section>
+<section id="key-findings" class="level2">
+<h2 class="anchored" data-anchor-id="key-findings">Key Findings</h2>
+<ol type="1">
+<li><strong>~66% of above-chance SNLI performance is replicable without the premise</strong>, by exploiting annotation artifacts in the hypothesis alone.</li>
+<li><strong>Shortcuts are statistically extreme</strong>: <em>nobody</em> predicts <em>contradiction</em> with 99.5% probability; four surface features achieve 49% accuracy.</li>
+<li><strong>The model has mechanistically internalized the shortcuts</strong>: IG attribution is 2.8× higher for strong-shortcut tokens, with a significant rank correlation between lift and attribution (ρ = 0.281, p &lt; 1e-4).</li>
+<li><strong>Removing shortcuts collapses the hypothesis-only model</strong>: from 70.91% to 48.18% on the filtered split (near chance on neutral and contradiction), while the pair model holds at 89.56%.</li>
+<li><strong>High benchmark scores mask genuine capability gaps</strong>: the pair model’s 90.34% standard accuracy hides both its shortcut dependence and a structural HANS entailment bias.</li>
+</ol>
+</section>
+<section id="relevance-to-ai-safety" class="level2">
+<h2 class="anchored" data-anchor-id="relevance-to-ai-safety">Relevance to AI Safety</h2>
+<p>This project is a concrete, reproducible demonstration of <strong>goal misgeneralization</strong>:</p>
+<ul>
+<li>The <em>intended</em> objective is semantic inference between sentences.</li>
+<li>The <em>learned</em> objective is hypothesis-side shortcut exploitation.</li>
+</ul>
+<p>The IG analysis makes this mechanistic rather than merely correlational: the model does not just <em>benefit</em> from shortcuts at the distributional level — it has <em>internalized</em> them as its primary decision rule. This has direct implications for:</p>
+<ul>
+<li><strong>Evaluation reliability</strong> — standard benchmark accuracy does not distinguish genuine reasoning from artifact exploitation.</li>
+<li><strong>Robustness under distribution shift</strong> — shortcuts break when annotation artifacts are neutralized, as the anti-shortcut splits demonstrate.</li>
+<li><strong>Capability elicitation</strong> — the pair model’s robustness on SNLI Filtered (−0.78 pp) shows that genuine reasoning capacity exists but is masked by easier shortcut strategies under standard training.</li>
+</ul>
+</section>
+<section id="stack" class="level2">
+<h2 class="anchored" data-anchor-id="stack">Stack</h2>
+<p><code>Python</code> · <code>PyTorch</code> · <code>Hugging Face Transformers</code> · <code>Captum</code> · <code>NLTK</code> · <code>scikit-learn</code> · <code>pandas</code> · <code>matplotlib</code> · <code>seaborn</code></p>
 
 
 </section>
