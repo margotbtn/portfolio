@@ -36,7 +36,9 @@
 
 ::: {.project-card}
 ### Shortcut Learning in NLI
-Can a model ace a language benchmark without understanding language? An empirical and mechanistic analysis of annotation artifacts in SNLI, using hypothesis-only ablations, lift analysis, and Integrated Gradients.
+What if an AI could score well on a language test without actually understanding language? This project reveals how AI models pick up on subtle statistical patterns in training data — and what it means for how much we can trust their results.
+
+[Dataset bias]{.tag} [AI Safety]{.tag} [Distribution shift]{.tag}
 
 [View project →](projects/nli-shortcut-learning.html){.project-link}
 :::
