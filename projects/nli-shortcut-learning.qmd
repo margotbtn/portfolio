@@ -27,13 +27,22 @@ and how much reflects annotation artifacts exploitable without reading the premi
 
 ## Method
 
-Four experimental phases, each building on the previous:
+Four experimental phases, each designed to peel back a layer of the model's performance and ask:
+where does this accuracy really come from?
 
 ### 1 · Pair model baseline
+
+This is the control: a model trained the normal way, reading both sentences together.
+It sets the bar for what "good" performance looks like.
+
 Fine-tuned `bert-base-uncased` on SNLI with standard premise + hypothesis input.
 Reached **90.34% accuracy** on the SNLI validation set — consistent with published results.
 
 ### 2 · Hypothesis-only ablation
+
+Here we deliberately handicapped the model: we hid the premise and asked it to classify using only the hypothesis.
+A model that truly understands language relationships should have struggled — but it didn't.
+
 Trained an identical model using **only the hypothesis** (premise dropped entirely).
 Result: **70.91% accuracy** — far above the 33.3% chance baseline.
 
@@ -43,6 +52,10 @@ without the premise.
 $(70.9 − 33.3) / (90.3 − 33.3) \approx 0.66$
 
 ### 3 · Shortcut identification
+
+To understand *why* the model still performed well without the premise, we looked for patterns
+in the training data it may have learned to exploit — statistical "tells" that leak the correct answer
+without requiring any actual reasoning about meaning.
 
 **Lexical shortcuts (lift analysis).**
 For each (token, label) pair across 549k training hypotheses, $lift = P(label | token) / P(label)$.
@@ -70,6 +83,10 @@ the model allocates more weight to statistically predictive tokens:
 
 ### 4 · Anti-shortcut evaluation
 
+If the shortcuts were responsible for the hypothesis-only model's performance,
+removing them should cause a much steeper drop than for the normal model.
+That is exactly what happens.
+
 Both models evaluated on three splits that neutralize lexical shortcuts:
 
 | Split            | n      | Pair    | Hyp-only | Pair drop | Hyp-only drop |
@@ -90,11 +107,25 @@ high-overlap entailment examples.
 
 ## Key Findings
 
+**Short answer: yes.** A model that never sees the premise still reaches 71% accuracy — far above the 33%
+you'd expect by chance. Most of that performance comes not from understanding language,
+but from picking up on statistical patterns in how humans phrased the test questions.
+
 1. **~66% of above-chance SNLI performance is replicable without the premise**, by exploiting annotation artifacts in the hypothesis alone.
 2. **Shortcuts are statistically extreme**: *nobody* predicts *contradiction* with 99.5% probability; four surface features achieve 49% accuracy.
 3. **The model has mechanistically internalized the shortcuts**: IG attribution is 2.8× higher for strong-shortcut tokens, with a significant rank correlation between lift and attribution (ρ = 0.281, p < 1e-4).
 4. **Removing shortcuts collapses the hypothesis-only model**: from 70.91% to 48.18% on the filtered split (near chance on neutral and contradiction), while the pair model holds at 89.56%.
 5. **High benchmark scores mask genuine capability gaps**: the pair model's 90.34% standard accuracy hides both its shortcut dependence and a structural HANS entailment bias.
+
+### What could be done about it?
+
+These results point to several directions worth exploring as next steps — none of them fully solved:
+
+- **Cleaner benchmarks**: Design evaluation datasets from the ground up to minimize exploitable patterns, rather than filtering them out after the fact.
+- **Shortcut-aware training**: Penalize models that over-rely on single words or surface features, pushing them toward reasoning from the full context. One concrete approach is to train a bias model (like the hypothesis-only model here) alongside the main model and penalize overlap in what they learn.
+- **Routine stress-testing**: Evaluate models on filtered or adversarial splits before reporting benchmark scores, to distinguish genuine reasoning from artifact exploitation. The filtered and paraphrased splits built in this project offer a reusable starting point.
+
+Exploring how much each of these strategies actually closes the capability gap — and whether they transfer across datasets and tasks — would be a natural continuation of this work.
 
 ## Relevance to AI Safety
 
