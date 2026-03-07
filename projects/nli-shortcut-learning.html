@@ -36,7 +36,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-a67ac2868200dddf7a4f0e3ae403775c.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-60e0b88e10e50a08bd19c3f953383a75.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-f91e080cd1f7c4726ee4de9ac6e0dee3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "language": {
     "search-no-results-text": "No results",
@@ -198,19 +198,22 @@ window.Quarto = {
 </section>
 <section id="method" class="level2">
 <h2 class="anchored" data-anchor-id="method">Method</h2>
-<p>Four experimental phases, each building on the previous:</p>
+<p>Four experimental phases, each designed to peel back a layer of the model’s performance and ask: where does this accuracy really come from?</p>
 <section id="pair-model-baseline" class="level3">
 <h3 class="anchored" data-anchor-id="pair-model-baseline">1 · Pair model baseline</h3>
+<p>This is the control: a model trained the normal way, reading both sentences together. It sets the bar for what “good” performance looks like.</p>
 <p>Fine-tuned <code>bert-base-uncased</code> on SNLI with standard premise + hypothesis input. Reached <strong>90.34% accuracy</strong> on the SNLI validation set — consistent with published results.</p>
 </section>
 <section id="hypothesis-only-ablation" class="level3">
 <h3 class="anchored" data-anchor-id="hypothesis-only-ablation">2 · Hypothesis-only ablation</h3>
+<p>Here we deliberately handicapped the model: we hid the premise and asked it to classify using only the hypothesis. A model that truly understands language relationships should have struggled — but it didn’t.</p>
 <p>Trained an identical model using <strong>only the hypothesis</strong> (premise dropped entirely). Result: <strong>70.91% accuracy</strong> — far above the 33.3% chance baseline.</p>
 <p>This single number is the central finding: ~66% of above-chance performance is replicable without the premise.</p>
 <p><span class="math inline">\((70.9 − 33.3) / (90.3 − 33.3) \approx 0.66\)</span></p>
 </section>
 <section id="shortcut-identification" class="level3">
 <h3 class="anchored" data-anchor-id="shortcut-identification">3 · Shortcut identification</h3>
+<p>To understand <em>why</em> the model still performed well without the premise, we looked for patterns in the training data it may have learned to exploit — statistical “tells” that leak the correct answer without requiring any actual reasoning about meaning.</p>
 <p><strong>Lexical shortcuts (lift analysis).</strong> For each (token, label) pair across 549k training hypotheses, <span class="math inline">\(lift = P(label | token) / P(label)\)</span>. 2,362 tokens retained after stopword filtering and a minimum count of 100:</p>
 <table class="caption-top table">
 <thead>
@@ -273,6 +276,7 @@ window.Quarto = {
 </section>
 <section id="anti-shortcut-evaluation" class="level3">
 <h3 class="anchored" data-anchor-id="anti-shortcut-evaluation">4 · Anti-shortcut evaluation</h3>
+<p>If the shortcuts were responsible for the hypothesis-only model’s performance, removing them should cause a much steeper drop than for the normal model. That is exactly what happens.</p>
 <p>Both models evaluated on three splits that neutralize lexical shortcuts:</p>
 <table class="caption-top table">
 <colgroup>
@@ -334,6 +338,7 @@ window.Quarto = {
 </section>
 <section id="key-findings" class="level2">
 <h2 class="anchored" data-anchor-id="key-findings">Key Findings</h2>
+<p><strong>Short answer: yes.</strong> A model that never sees the premise still reaches 71% accuracy — far above the 33% you’d expect by chance. Most of that performance comes not from understanding language, but from picking up on statistical patterns in how humans phrased the test questions.</p>
 <ol type="1">
 <li><strong>~66% of above-chance SNLI performance is replicable without the premise</strong>, by exploiting annotation artifacts in the hypothesis alone.</li>
 <li><strong>Shortcuts are statistically extreme</strong>: <em>nobody</em> predicts <em>contradiction</em> with 99.5% probability; four surface features achieve 49% accuracy.</li>
@@ -341,6 +346,16 @@ window.Quarto = {
 <li><strong>Removing shortcuts collapses the hypothesis-only model</strong>: from 70.91% to 48.18% on the filtered split (near chance on neutral and contradiction), while the pair model holds at 89.56%.</li>
 <li><strong>High benchmark scores mask genuine capability gaps</strong>: the pair model’s 90.34% standard accuracy hides both its shortcut dependence and a structural HANS entailment bias.</li>
 </ol>
+<section id="what-could-be-done-about-it" class="level3">
+<h3 class="anchored" data-anchor-id="what-could-be-done-about-it">What could be done about it?</h3>
+<p>These results point to several directions worth exploring as next steps — none of them fully solved:</p>
+<ul>
+<li><strong>Cleaner benchmarks</strong>: Design evaluation datasets from the ground up to minimize exploitable patterns, rather than filtering them out after the fact.</li>
+<li><strong>Shortcut-aware training</strong>: Penalize models that over-rely on single words or surface features, pushing them toward reasoning from the full context. One concrete approach is to train a bias model (like the hypothesis-only model here) alongside the main model and penalize overlap in what they learn.</li>
+<li><strong>Routine stress-testing</strong>: Evaluate models on filtered or adversarial splits before reporting benchmark scores, to distinguish genuine reasoning from artifact exploitation. The filtered and paraphrased splits built in this project offer a reusable starting point.</li>
+</ul>
+<p>Exploring how much each of these strategies actually closes the capability gap — and whether they transfer across datasets and tasks — would be a natural continuation of this work.</p>
+</section>
 </section>
 <section id="relevance-to-ai-safety" class="level2">
 <h2 class="anchored" data-anchor-id="relevance-to-ai-safety">Relevance to AI Safety</h2>

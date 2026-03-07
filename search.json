@@ -35,6 +35,41 @@
     "text": "Want to learn more about my background and experience? You can find my resume below:\n Download my resume (PDF)"
   },
   {
+    "objectID": "projects/project3.html",
+    "href": "projects/project3.html",
+    "title": "Margot Berton",
+    "section": "",
+    "text": "TODO"
+  },
+  {
+    "objectID": "projects/project3.html#project-3",
+    "href": "projects/project3.html#project-3",
+    "title": "Margot Berton",
+    "section": "",
+    "text": "TODO"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Margot Berton | Data Scientist",
+    "section": "",
+    "text": "Currently working in AI/ML at BNP Paribas – Montréal\n\nPython Applied Machine Learning Model Interpretability AI & Societal Impact"
+  },
+  {
+    "objectID": "index.html#selected-projects",
+    "href": "index.html#selected-projects",
+    "title": "Margot Berton | Data Scientist",
+    "section": "Selected projects",
+    "text": "Selected projects\n\n\n\nShortcut Learning in NLI\nWhat if an AI could score well on a language test without actually understanding language? This project reveals how AI models pick up on subtle statistical patterns in training data — and what it means for how much we can trust their results.\nDataset bias AI Safety Distribution shift\nView project →\n\n\nProject 2\nAnother concise description, focusing on impact or techniques used.\nView project →\n\n\nProject 3\nOptional third project.\nView project →"
+  },
+  {
+    "objectID": "index.html#contact",
+    "href": "index.html#contact",
+    "title": "Margot Berton | Data Scientist",
+    "section": "Contact",
+    "text": "Contact\n\nI’m always happy to discuss data science, applied machine learning, and how AI systems can be designed with real-world and societal considerations in mind.\n\n Name  \n Email  \n Message\n\n\n Send"
+  },
+  {
     "objectID": "projects/nli-shortcut-learning.html",
     "href": "projects/nli-shortcut-learning.html",
     "title": "Shortcut Learning in NLI",
@@ -53,14 +88,14 @@
     "href": "projects/nli-shortcut-learning.html#method",
     "title": "Shortcut Learning in NLI",
     "section": "Method",
-    "text": "Method\nFour experimental phases, each building on the previous:\n\n1 · Pair model baseline\nFine-tuned bert-base-uncased on SNLI with standard premise + hypothesis input. Reached 90.34% accuracy on the SNLI validation set — consistent with published results.\n\n\n2 · Hypothesis-only ablation\nTrained an identical model using only the hypothesis (premise dropped entirely). Result: 70.91% accuracy — far above the 33.3% chance baseline.\nThis single number is the central finding: ~66% of above-chance performance is replicable without the premise.\n\\((70.9 − 33.3) / (90.3 − 33.3) \\approx 0.66\\)\n\n\n3 · Shortcut identification\nLexical shortcuts (lift analysis). For each (token, label) pair across 549k training hypotheses, \\(lift = P(label | token) / P(label)\\). 2,362 tokens retained after stopword filtering and a minimum count of 100:\n\n\n\nLabel\nToken\nLift\nP(label | token)\n\n\n\n\nEntailment\nleast\n3.07\n92.5%\n\n\nNeutral\nchampionship\n2.59\n95.0%\n\n\nContradiction\nnobody\n3.00\n99.5%\n\n\n\nStructural shortcuts. Four surface features (hypothesis length, premise–hypothesis overlap, Jaccard) alone achieve 49% accuracy in logistic regression cross-validation — 15.7 pp above chance, with no semantic understanding.\nToken attribution (Integrated Gradients). IG attributions computed for 500 validation examples (4,152 token records) show that the model allocates more weight to statistically predictive tokens:\n\n\n\n\n\n\n\nEvidence\nResult\n\n\n\n\nShortcut vs. other tokens\nMean |attr|: 0.398 vs 0.288 — 1.38× higher\n\n\nAttribution by lift bin\n0.288 (low) → 0.800 (high) — 2.8× gradient\n\n\nSpearman ρ (lift vs. attr)\n0.281, p = 4.95e-05\n\n\n\n\n\n4 · Anti-shortcut evaluation\nBoth models evaluated on three splits that neutralize lexical shortcuts:\n\n\n\n\n\n\n\n\n\n\n\nSplit\nn\nPair\nHyp-only\nPair drop\nHyp-only drop\n\n\n\n\nSNLI validation\n9,842\n90.34%\n70.91%\n—\n—\n\n\nHANS (OOD)\n30,000\n59.39%\n51.62%\n−30.95 pp\n−19.29 pp\n\n\nSNLI Filtered\n795\n89.56%\n48.18%\n−0.78 pp\n−22.73 pp\n\n\nSNLI Paraphrased\n1,235\n68.91%\n44.37%\n−21.43 pp\n−26.54 pp\n\n\n\nSNLI Filtered removes all examples with any token of lift &gt; 1.2. The pair model drops only −0.78 pp (genuine reasoning capacity intact). The hypothesis-only model drops −22.73 pp — a 29× larger drop — confirming that lexical shortcuts drove most of its above-chance performance.\nHANS exposes an entailment bias in the pair model: 99.1% entailment recall but only 19.68% non-entailment recall, because SNLI training over-represents high-overlap entailment examples."
+    "text": "Method\nFour experimental phases, each designed to peel back a layer of the model’s performance and ask: where does this accuracy really come from?\n\n1 · Pair model baseline\nThis is the control: a model trained the normal way, reading both sentences together. It sets the bar for what “good” performance looks like.\nFine-tuned bert-base-uncased on SNLI with standard premise + hypothesis input. Reached 90.34% accuracy on the SNLI validation set — consistent with published results.\n\n\n2 · Hypothesis-only ablation\nHere we deliberately handicapped the model: we hid the premise and asked it to classify using only the hypothesis. A model that truly understands language relationships should have struggled — but it didn’t.\nTrained an identical model using only the hypothesis (premise dropped entirely). Result: 70.91% accuracy — far above the 33.3% chance baseline.\nThis single number is the central finding: ~66% of above-chance performance is replicable without the premise.\n\\((70.9 − 33.3) / (90.3 − 33.3) \\approx 0.66\\)\n\n\n3 · Shortcut identification\nTo understand why the model still performed well without the premise, we looked for patterns in the training data it may have learned to exploit — statistical “tells” that leak the correct answer without requiring any actual reasoning about meaning.\nLexical shortcuts (lift analysis). For each (token, label) pair across 549k training hypotheses, \\(lift = P(label | token) / P(label)\\). 2,362 tokens retained after stopword filtering and a minimum count of 100:\n\n\n\nLabel\nToken\nLift\nP(label | token)\n\n\n\n\nEntailment\nleast\n3.07\n92.5%\n\n\nNeutral\nchampionship\n2.59\n95.0%\n\n\nContradiction\nnobody\n3.00\n99.5%\n\n\n\nStructural shortcuts. Four surface features (hypothesis length, premise–hypothesis overlap, Jaccard) alone achieve 49% accuracy in logistic regression cross-validation — 15.7 pp above chance, with no semantic understanding.\nToken attribution (Integrated Gradients). IG attributions computed for 500 validation examples (4,152 token records) show that the model allocates more weight to statistically predictive tokens:\n\n\n\n\n\n\n\nEvidence\nResult\n\n\n\n\nShortcut vs. other tokens\nMean |attr|: 0.398 vs 0.288 — 1.38× higher\n\n\nAttribution by lift bin\n0.288 (low) → 0.800 (high) — 2.8× gradient\n\n\nSpearman ρ (lift vs. attr)\n0.281, p = 4.95e-05\n\n\n\n\n\n4 · Anti-shortcut evaluation\nIf the shortcuts were responsible for the hypothesis-only model’s performance, removing them should cause a much steeper drop than for the normal model. That is exactly what happens.\nBoth models evaluated on three splits that neutralize lexical shortcuts:\n\n\n\n\n\n\n\n\n\n\n\nSplit\nn\nPair\nHyp-only\nPair drop\nHyp-only drop\n\n\n\n\nSNLI validation\n9,842\n90.34%\n70.91%\n—\n—\n\n\nHANS (OOD)\n30,000\n59.39%\n51.62%\n−30.95 pp\n−19.29 pp\n\n\nSNLI Filtered\n795\n89.56%\n48.18%\n−0.78 pp\n−22.73 pp\n\n\nSNLI Paraphrased\n1,235\n68.91%\n44.37%\n−21.43 pp\n−26.54 pp\n\n\n\nSNLI Filtered removes all examples with any token of lift &gt; 1.2. The pair model drops only −0.78 pp (genuine reasoning capacity intact). The hypothesis-only model drops −22.73 pp — a 29× larger drop — confirming that lexical shortcuts drove most of its above-chance performance.\nHANS exposes an entailment bias in the pair model: 99.1% entailment recall but only 19.68% non-entailment recall, because SNLI training over-represents high-overlap entailment examples."
   },
   {
     "objectID": "projects/nli-shortcut-learning.html#key-findings",
     "href": "projects/nli-shortcut-learning.html#key-findings",
     "title": "Shortcut Learning in NLI",
     "section": "Key Findings",
-    "text": "Key Findings\n\n~66% of above-chance SNLI performance is replicable without the premise, by exploiting annotation artifacts in the hypothesis alone.\nShortcuts are statistically extreme: nobody predicts contradiction with 99.5% probability; four surface features achieve 49% accuracy.\nThe model has mechanistically internalized the shortcuts: IG attribution is 2.8× higher for strong-shortcut tokens, with a significant rank correlation between lift and attribution (ρ = 0.281, p &lt; 1e-4).\nRemoving shortcuts collapses the hypothesis-only model: from 70.91% to 48.18% on the filtered split (near chance on neutral and contradiction), while the pair model holds at 89.56%.\nHigh benchmark scores mask genuine capability gaps: the pair model’s 90.34% standard accuracy hides both its shortcut dependence and a structural HANS entailment bias."
+    "text": "Key Findings\nShort answer: yes. A model that never sees the premise still reaches 71% accuracy — far above the 33% you’d expect by chance. Most of that performance comes not from understanding language, but from picking up on statistical patterns in how humans phrased the test questions.\n\n~66% of above-chance SNLI performance is replicable without the premise, by exploiting annotation artifacts in the hypothesis alone.\nShortcuts are statistically extreme: nobody predicts contradiction with 99.5% probability; four surface features achieve 49% accuracy.\nThe model has mechanistically internalized the shortcuts: IG attribution is 2.8× higher for strong-shortcut tokens, with a significant rank correlation between lift and attribution (ρ = 0.281, p &lt; 1e-4).\nRemoving shortcuts collapses the hypothesis-only model: from 70.91% to 48.18% on the filtered split (near chance on neutral and contradiction), while the pair model holds at 89.56%.\nHigh benchmark scores mask genuine capability gaps: the pair model’s 90.34% standard accuracy hides both its shortcut dependence and a structural HANS entailment bias.\n\n\nWhat could be done about it?\nThese results point to several directions worth exploring as next steps — none of them fully solved:\n\nCleaner benchmarks: Design evaluation datasets from the ground up to minimize exploitable patterns, rather than filtering them out after the fact.\nShortcut-aware training: Penalize models that over-rely on single words or surface features, pushing them toward reasoning from the full context. One concrete approach is to train a bias model (like the hypothesis-only model here) alongside the main model and penalize overlap in what they learn.\nRoutine stress-testing: Evaluate models on filtered or adversarial splits before reporting benchmark scores, to distinguish genuine reasoning from artifact exploitation. The filtered and paraphrased splits built in this project offer a reusable starting point.\n\nExploring how much each of these strategies actually closes the capability gap — and whether they transfer across datasets and tasks — would be a natural continuation of this work."
   },
   {
     "objectID": "projects/nli-shortcut-learning.html#relevance-to-ai-safety",
@@ -77,20 +112,6 @@
     "text": "Stack\nPython · PyTorch · Hugging Face Transformers · Captum · NLTK · scikit-learn · pandas · matplotlib · seaborn"
   },
   {
-    "objectID": "projects/project3.html",
-    "href": "projects/project3.html",
-    "title": "Margot Berton",
-    "section": "",
-    "text": "TODO"
-  },
-  {
-    "objectID": "projects/project3.html#project-3",
-    "href": "projects/project3.html#project-3",
-    "title": "Margot Berton",
-    "section": "",
-    "text": "TODO"
-  },
-  {
     "objectID": "projects/project2.html",
     "href": "projects/project2.html",
     "title": "Margot Berton",
@@ -103,26 +124,5 @@
     "title": "Margot Berton",
     "section": "",
     "text": "TODO"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Margot Berton | Data Scientist",
-    "section": "",
-    "text": "Currently working in AI/ML at BNP Paribas – Montréal\n\nPython Applied Machine Learning Model Interpretability AI & Societal Impact"
-  },
-  {
-    "objectID": "index.html#selected-projects",
-    "href": "index.html#selected-projects",
-    "title": "Margot Berton | Data Scientist",
-    "section": "Selected projects",
-    "text": "Selected projects\n\n\n\nShortcut Learning in NLI\nCan a model ace a language benchmark without understanding language? An empirical and mechanistic analysis of annotation artifacts in SNLI, using hypothesis-only ablations, lift analysis, and Integrated Gradients.\nView project →\n\n\nProject 2\nAnother concise description, focusing on impact or techniques used.\nView project →\n\n\nProject 3\nOptional third project.\nView project →"
-  },
-  {
-    "objectID": "index.html#contact",
-    "href": "index.html#contact",
-    "title": "Margot Berton | Data Scientist",
-    "section": "Contact",
-    "text": "Contact\n\nI’m always happy to discuss data science, applied machine learning, and how AI systems can be designed with real-world and societal considerations in mind.\n\n Name  \n Email  \n Message\n\n\n Send"
   }
 ]
