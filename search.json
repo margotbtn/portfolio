@@ -114,15 +114,43 @@
   {
     "objectID": "projects/project2.html",
     "href": "projects/project2.html",
-    "title": "Margot Berton",
+    "title": "FinSight — Market Intelligence Agent",
     "section": "",
-    "text": "TODO"
+    "text": "One paragraph on what the project does and why."
   },
   {
-    "objectID": "projects/project2.html#project-2",
-    "href": "projects/project2.html#project-2",
-    "title": "Margot Berton",
+    "objectID": "projects/project2.html#overview",
+    "href": "projects/project2.html#overview",
+    "title": "FinSight — Market Intelligence Agent",
     "section": "",
-    "text": "TODO"
+    "text": "One paragraph on what the project does and why."
+  },
+  {
+    "objectID": "projects/project2.html#architecture",
+    "href": "projects/project2.html#architecture",
+    "title": "FinSight — Market Intelligence Agent",
+    "section": "Architecture",
+    "text": "Architecture\nThe ASCII diagram from your README works well here, or a Mermaid diagram:\n\n\n\n\n\ngraph LR\n  U[User question] --&gt; A[Claude claude-sonnet-4-6]\n  A --&gt;|get_indicators| S[(DuckDB\\nprices · technicals · fundamentals)]\n  A --&gt;|search_news| R[(ChromaDB\\nnews embeddings)]\n  S --&gt; A\n  R --&gt; A\n  A --&gt; O[Structured analysis]"
+  },
+  {
+    "objectID": "projects/project2.html#key-design-decisions",
+    "href": "projects/project2.html#key-design-decisions",
+    "title": "FinSight — Market Intelligence Agent",
+    "section": "Key design decisions",
+    "text": "Key design decisions\n\nWhy MCP (vs direct function calls)\nWhy DuckDB + ChromaDB together\nHow the agentic loop works"
+  },
+  {
+    "objectID": "projects/project2.html#try-it",
+    "href": "projects/project2.html#try-it",
+    "title": "FinSight — Market Intelligence Agent",
+    "section": "Try it",
+    "text": "Try it"
+  },
+  {
+    "objectID": "projects/project2.html#code",
+    "href": "projects/project2.html#code",
+    "title": "FinSight — Market Intelligence Agent",
+    "section": "Code",
+    "text": "Code\nGitHub repo"
   }
 ]

@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2026-03-11">
+<meta name="description" content="An agentic RAG system for financial analysis powered by Claude">
 
-<title>project2 – Margot Berton</title>
+<title>FinSight — Market Intelligence Agent – Margot Berton</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -52,6 +54,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -125,14 +130,85 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">FinSight — Market Intelligence Agent</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">AI</div>
+    <div class="quarto-category">Finance</div>
+    <div class="quarto-category">Python</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    An agentic RAG system for financial analysis powered by Claude
+  </div>
+</div>
 
 
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 11, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
 
 
-<section id="project-2" class="level2">
-<h2 class="anchored" data-anchor-id="project-2">Project 2</h2>
-<p>TODO</p>
+</header>
+
+
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>One paragraph on what the project does and why.</p>
+</section>
+<section id="architecture" class="level2">
+<h2 class="anchored" data-anchor-id="architecture">Architecture</h2>
+<p>The ASCII diagram from your README works well here, or a Mermaid diagram:</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph LR
+  U[User question] --&gt; A[Claude claude-sonnet-4-6]
+  A --&gt;|get_indicators| S[(DuckDB\nprices · technicals · fundamentals)]
+  A --&gt;|search_news| R[(ChromaDB\nnews embeddings)]
+  S --&gt; A
+  R --&gt; A
+  A --&gt; O[Structured analysis]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="key-design-decisions" class="level2">
+<h2 class="anchored" data-anchor-id="key-design-decisions">Key design decisions</h2>
+<ul>
+<li>Why MCP (vs direct function calls)</li>
+<li>Why DuckDB + ChromaDB together</li>
+<li>How the agentic loop works</li>
+</ul>
+</section>
+<section id="try-it" class="level2">
+<h2 class="anchored" data-anchor-id="try-it">Try it</h2>
+<iframe src="https://huggingface.co/spaces/margotbtn/finsight" width="100%" height="700px" style="border:none; border-radius:8px;">
+</iframe>
+</section>
+<section id="code" class="level2">
+<h2 class="anchored" data-anchor-id="code">Code</h2>
+<p><a href="https://github.com/...">GitHub repo</a></p>
 
 
 </section>
