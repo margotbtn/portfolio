@@ -1,0 +1,81 @@
+---
+title: "FinSight — Market Intelligence Agent"
+categories: [MCP, Finance, RAG, Agentic AI]
+format:
+  html:
+    toc: true
+    toc-depth: 2
+---
+
+**What does a stock's price chart actually mean right now?**
+FinSight is an AI agent that answers that question by combining hard numbers — prices, moving averages, earnings ratios — with the latest news, and reasoning over both to produce a structured market analysis. You ask a question in plain English; it figures out what data to pull and synthesises an answer.
+
+::: {style="margin: 1.5rem 0;"}
+[View on HuggingFace Space →](https://huggingface.co/spaces/margotbtn/finsight){.button}
+:::
+
+## Context
+
+Financial analysis has always lived across two very different worlds.
+
+On one side: spreadsheets, price feeds, technical indicators — precise, structured, numerical. On the other: news articles, earnings calls, analyst reports — unstructured, contextual, full of nuance. Most tools force you to work in one world at a time, leaving the connection between them to you.
+
+FinSight bridges them. Given a question like *"Is NVDA showing any bullish signals right now?"*, the agent retrieves quantitative indicators from a structured database **and** surfaces relevant recent news from a semantic search index — then reasons over both before responding. Neither data source alone would give the full picture.
+
+## Architecture
+
+```{mermaid}
+graph LR
+  U[User question] --> A[Claude claude-sonnet-4-6]
+  A -->|get_indicators| S[(DuckDB\nprices · technicals · fundamentals)]
+  A -->|search_news| R[(ChromaDB\nnews embeddings)]
+  S --> A
+  R --> A
+  A --> O[Structured analysis]
+```
+
+The agent is built around a single loop: Claude receives a question, decides which tools to call (and in what order), collects the results, and synthesises a final answer. It can call `get_indicators` and `search_news` independently, sequentially, or multiple times — whatever the question demands.
+
+## Key design decisions
+
+### Why MCP instead of direct function calls
+
+The standard approach to giving an LLM access to tools is to hard-code a list of functions it can call directly in the application code. This works, but it tightly couples the AI logic to the infrastructure: adding a new data source means touching the model integration layer.
+
+[Model Context Protocol (MCP)](https://modelcontextprotocol.io/) inverts this. Tools are defined as a separate server that Claude connects to — the model knows what tools exist and what they do, but the application code doesn't need to change when tools are added, modified, or swapped out. It also makes the tool layer independently testable.
+
+For a project where the data sources are likely to evolve (add an options flow feed, a macroeconomic indicator, an SEC filing index), this separation of concerns pays off quickly.
+
+### Why DuckDB and ChromaDB together
+
+The two databases serve fundamentally different retrieval needs.
+
+**DuckDB** handles structured, exact queries: *"Give me the 50-day and 200-day moving average for AAPL, plus trailing P/E."* This is analytical SQL over tabular data — fast, precise, no ambiguity. DuckDB runs in-process with no server overhead, making it ideal for an embedded analytics layer.
+
+**ChromaDB** handles semantic, fuzzy search: *"Find news about supply chain risks in the semiconductor sector from the last two weeks."* Raw keyword search would miss paraphrases and related concepts; embedding-based search finds documents by meaning. ChromaDB stores pre-embedded news chunks and returns the most semantically relevant ones given any query.
+
+Using both means the agent can answer questions that require either type of retrieval — or both at once.
+
+### How the agentic loop works
+
+The agent doesn't follow a fixed script. Claude decides at inference time which tools to use, in what order, and whether the results are sufficient to answer the question or whether another retrieval step is needed. A multi-part question might trigger the following sequence:
+
+1. Call `get_indicators` to fetch price and technical data for the ticker
+2. Observe a volatility spike in the results, decide to search for context
+3. Call `search_news` with a query derived from those results
+4. Synthesise a response that ties the numbers to the news narrative
+
+This capacity for dynamic, multi-step tool use — rather than a single retrieval pass — is what makes the system an *agent* rather than a retrieval-augmented chatbot.
+
+## Try it
+
+<iframe
+	src="https://margotbtn-finsight.hf.space"
+	frameborder="0"
+	width="850"
+	height="450"
+></iframe>
+
+## Stack
+
+`Python` · `Claude API (claude-sonnet-4-6)` · `MCP` · `DuckDB` · `ChromaDB` · `Gradio` · `HuggingFace Spaces`

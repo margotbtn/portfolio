@@ -44,10 +44,12 @@ What if an AI could score well on a language test without actually understanding
 :::
 
 ::: {.project-card}
-### Project 2
-Another concise description, focusing on impact or techniques used.
+### Finsight
+An agentic RAG system for financial analysis powered by Claude.
 
-[View project →](projects/project2.html){.project-link}
+[MCP]{.tag} [RAG]{.tag} [Agentic AI]{.tag}
+
+[View project →](projects/finsight.html){.project-link}
 :::
 
 ::: {.project-card}

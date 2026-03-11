@@ -1,5 +1,6 @@
 ---
 title: "Shortcut Learning in NLI"
+categories: [AI Safety, Dataset bias]
 format:
   html:
     toc: true
