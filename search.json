@@ -60,7 +60,7 @@
     "href": "index.html#selected-projects",
     "title": "Margot Berton | Data Scientist",
     "section": "Selected projects",
-    "text": "Selected projects\n\n\n\nShortcut Learning in NLI\nWhat if an AI could score well on a language test without actually understanding language? This project reveals how AI models pick up on subtle statistical patterns in training data — and what it means for how much we can trust their results.\nDataset bias AI Safety Distribution shift\nView project →\n\n\nProject 2\nAnother concise description, focusing on impact or techniques used.\nView project →\n\n\nProject 3\nOptional third project.\nView project →"
+    "text": "Selected projects\n\n\n\nShortcut Learning in NLI\nWhat if an AI could score well on a language test without actually understanding language? This project reveals how AI models pick up on subtle statistical patterns in training data — and what it means for how much we can trust their results.\nDataset bias AI Safety Distribution shift\nView project →\n\n\nFinsight\nAn agentic RAG system for financial analysis powered by Claude.\nMCP RAG Agentic AI\nView project →\n\n\nProject 3\nOptional third project.\nView project →"
   },
   {
     "objectID": "index.html#contact",
@@ -112,45 +112,45 @@
     "text": "Stack\nPython · PyTorch · Hugging Face Transformers · Captum · NLTK · scikit-learn · pandas · matplotlib · seaborn"
   },
   {
-    "objectID": "projects/project2.html",
-    "href": "projects/project2.html",
+    "objectID": "projects/finsight.html",
+    "href": "projects/finsight.html",
     "title": "FinSight — Market Intelligence Agent",
     "section": "",
-    "text": "One paragraph on what the project does and why."
+    "text": "What does a stock’s price chart actually mean right now? FinSight is an AI agent that answers that question by combining hard numbers — prices, moving averages, earnings ratios — with the latest news, and reasoning over both to produce a structured market analysis. You ask a question in plain English; it figures out what data to pull and synthesises an answer."
   },
   {
-    "objectID": "projects/project2.html#overview",
-    "href": "projects/project2.html#overview",
+    "objectID": "projects/finsight.html#context",
+    "href": "projects/finsight.html#context",
     "title": "FinSight — Market Intelligence Agent",
-    "section": "",
-    "text": "One paragraph on what the project does and why."
+    "section": "Context",
+    "text": "Context\nFinancial analysis has always lived across two very different worlds.\nOn one side: spreadsheets, price feeds, technical indicators — precise, structured, numerical. On the other: news articles, earnings calls, analyst reports — unstructured, contextual, full of nuance. Most tools force you to work in one world at a time, leaving the connection between them to you.\nFinSight bridges them. Given a question like “Is NVDA showing any bullish signals right now?”, the agent retrieves quantitative indicators from a structured database and surfaces relevant recent news from a semantic search index — then reasons over both before responding. Neither data source alone would give the full picture."
   },
   {
-    "objectID": "projects/project2.html#architecture",
-    "href": "projects/project2.html#architecture",
+    "objectID": "projects/finsight.html#architecture",
+    "href": "projects/finsight.html#architecture",
     "title": "FinSight — Market Intelligence Agent",
     "section": "Architecture",
-    "text": "Architecture\nThe ASCII diagram from your README works well here, or a Mermaid diagram:\n\n\n\n\n\ngraph LR\n  U[User question] --&gt; A[Claude claude-sonnet-4-6]\n  A --&gt;|get_indicators| S[(DuckDB\\nprices · technicals · fundamentals)]\n  A --&gt;|search_news| R[(ChromaDB\\nnews embeddings)]\n  S --&gt; A\n  R --&gt; A\n  A --&gt; O[Structured analysis]"
+    "text": "Architecture\n\n\n\n\n\ngraph LR\n  U[User question] --&gt; A[Claude claude-sonnet-4-6]\n  A --&gt;|get_indicators| S[(DuckDB\\nprices · technicals · fundamentals)]\n  A --&gt;|search_news| R[(ChromaDB\\nnews embeddings)]\n  S --&gt; A\n  R --&gt; A\n  A --&gt; O[Structured analysis]\n\n\n\n\n\n\nThe agent is built around a single loop: Claude receives a question, decides which tools to call (and in what order), collects the results, and synthesises a final answer. It can call get_indicators and search_news independently, sequentially, or multiple times — whatever the question demands."
   },
   {
-    "objectID": "projects/project2.html#key-design-decisions",
-    "href": "projects/project2.html#key-design-decisions",
+    "objectID": "projects/finsight.html#key-design-decisions",
+    "href": "projects/finsight.html#key-design-decisions",
     "title": "FinSight — Market Intelligence Agent",
     "section": "Key design decisions",
-    "text": "Key design decisions\n\nWhy MCP (vs direct function calls)\nWhy DuckDB + ChromaDB together\nHow the agentic loop works"
+    "text": "Key design decisions\n\nWhy MCP instead of direct function calls\nThe standard approach to giving an LLM access to tools is to hard-code a list of functions it can call directly in the application code. This works, but it tightly couples the AI logic to the infrastructure: adding a new data source means touching the model integration layer.\nModel Context Protocol (MCP) inverts this. Tools are defined as a separate server that Claude connects to — the model knows what tools exist and what they do, but the application code doesn’t need to change when tools are added, modified, or swapped out. It also makes the tool layer independently testable.\nFor a project where the data sources are likely to evolve (add an options flow feed, a macroeconomic indicator, an SEC filing index), this separation of concerns pays off quickly.\n\n\nWhy DuckDB and ChromaDB together\nThe two databases serve fundamentally different retrieval needs.\nDuckDB handles structured, exact queries: “Give me the 50-day and 200-day moving average for AAPL, plus trailing P/E.” This is analytical SQL over tabular data — fast, precise, no ambiguity. DuckDB runs in-process with no server overhead, making it ideal for an embedded analytics layer.\nChromaDB handles semantic, fuzzy search: “Find news about supply chain risks in the semiconductor sector from the last two weeks.” Raw keyword search would miss paraphrases and related concepts; embedding-based search finds documents by meaning. ChromaDB stores pre-embedded news chunks and returns the most semantically relevant ones given any query.\nUsing both means the agent can answer questions that require either type of retrieval — or both at once.\n\n\nHow the agentic loop works\nThe agent doesn’t follow a fixed script. Claude decides at inference time which tools to use, in what order, and whether the results are sufficient to answer the question or whether another retrieval step is needed. A multi-part question might trigger the following sequence:\n\nCall get_indicators to fetch price and technical data for the ticker\nObserve a volatility spike in the results, decide to search for context\nCall search_news with a query derived from those results\nSynthesise a response that ties the numbers to the news narrative\n\nThis capacity for dynamic, multi-step tool use — rather than a single retrieval pass — is what makes the system an agent rather than a retrieval-augmented chatbot."
   },
   {
-    "objectID": "projects/project2.html#try-it",
-    "href": "projects/project2.html#try-it",
+    "objectID": "projects/finsight.html#try-it",
+    "href": "projects/finsight.html#try-it",
     "title": "FinSight — Market Intelligence Agent",
     "section": "Try it",
     "text": "Try it"
   },
   {
-    "objectID": "projects/project2.html#code",
-    "href": "projects/project2.html#code",
+    "objectID": "projects/finsight.html#stack",
+    "href": "projects/finsight.html#stack",
     "title": "FinSight — Market Intelligence Agent",
-    "section": "Code",
-    "text": "Code\nGitHub repo"
+    "section": "Stack",
+    "text": "Stack\nPython · Claude API (claude-sonnet-4-6) · MCP · DuckDB · ChromaDB · Gradio · HuggingFace Spaces"
   }
 ]

@@ -6,8 +6,6 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-03-11">
-<meta name="description" content="An agentic RAG system for financial analysis powered by Claude">
 
 <title>FinSight — Market Intelligence Agent – Margot Berton</title>
 <style>
@@ -62,7 +60,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -96,8 +94,8 @@ ul.task-list li input[type="checkbox"] {
  <span class="dropdown-text">Shortcut Learning in NLI</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../projects/project2.html">
- <span class="dropdown-text">Project 2</span></a>
+    <a class="dropdown-item" href="../projects/finsight.html">
+ <span class="dropdown-text">Finsight</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../projects/project3.html">
@@ -128,7 +126,19 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#context" id="toc-context" class="nav-link active" data-scroll-target="#context">Context</a></li>
+  <li><a href="#architecture" id="toc-architecture" class="nav-link" data-scroll-target="#architecture">Architecture</a></li>
+  <li><a href="#key-design-decisions" id="toc-key-design-decisions" class="nav-link" data-scroll-target="#key-design-decisions">Key design decisions</a></li>
+  <li><a href="#try-it" id="toc-try-it" class="nav-link" data-scroll-target="#try-it">Try it</a></li>
+  <li><a href="#stack" id="toc-stack" class="nav-link" data-scroll-target="#stack">Stack</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -136,28 +146,18 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-title">
 <h1 class="title">FinSight — Market Intelligence Agent</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">AI</div>
+    <div class="quarto-category">MCP</div>
     <div class="quarto-category">Finance</div>
-    <div class="quarto-category">Python</div>
+    <div class="quarto-category">RAG</div>
+    <div class="quarto-category">Agentic AI</div>
   </div>
   </div>
 
-<div>
-  <div class="description">
-    An agentic RAG system for financial analysis powered by Claude
-  </div>
-</div>
 
 
 <div class="quarto-title-meta">
 
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">March 11, 2026</p>
-    </div>
-  </div>
   
     
   </div>
@@ -167,13 +167,18 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>One paragraph on what the project does and why.</p>
+<p><strong>What does a stock’s price chart actually mean right now?</strong> FinSight is an AI agent that answers that question by combining hard numbers — prices, moving averages, earnings ratios — with the latest news, and reasoning over both to produce a structured market analysis. You ask a question in plain English; it figures out what data to pull and synthesises an answer.</p>
+<div style="margin: 1.5rem 0;">
+<p><a href="https://huggingface.co/spaces/margotbtn/finsight" class="button">View on HuggingFace Space →</a></p>
+</div>
+<section id="context" class="level2">
+<h2 class="anchored" data-anchor-id="context">Context</h2>
+<p>Financial analysis has always lived across two very different worlds.</p>
+<p>On one side: spreadsheets, price feeds, technical indicators — precise, structured, numerical. On the other: news articles, earnings calls, analyst reports — unstructured, contextual, full of nuance. Most tools force you to work in one world at a time, leaving the connection between them to you.</p>
+<p>FinSight bridges them. Given a question like <em>“Is NVDA showing any bullish signals right now?”</em>, the agent retrieves quantitative indicators from a structured database <strong>and</strong> surfaces relevant recent news from a semantic search index — then reasons over both before responding. Neither data source alone would give the full picture.</p>
 </section>
 <section id="architecture" class="level2">
 <h2 class="anchored" data-anchor-id="architecture">Architecture</h2>
-<p>The ASCII diagram from your README works well here, or a Mermaid diagram:</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -192,23 +197,43 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
+<p>The agent is built around a single loop: Claude receives a question, decides which tools to call (and in what order), collects the results, and synthesises a final answer. It can call <code>get_indicators</code> and <code>search_news</code> independently, sequentially, or multiple times — whatever the question demands.</p>
 </section>
 <section id="key-design-decisions" class="level2">
 <h2 class="anchored" data-anchor-id="key-design-decisions">Key design decisions</h2>
-<ul>
-<li>Why MCP (vs direct function calls)</li>
-<li>Why DuckDB + ChromaDB together</li>
-<li>How the agentic loop works</li>
-</ul>
+<section id="why-mcp-instead-of-direct-function-calls" class="level3">
+<h3 class="anchored" data-anchor-id="why-mcp-instead-of-direct-function-calls">Why MCP instead of direct function calls</h3>
+<p>The standard approach to giving an LLM access to tools is to hard-code a list of functions it can call directly in the application code. This works, but it tightly couples the AI logic to the infrastructure: adding a new data source means touching the model integration layer.</p>
+<p><a href="https://modelcontextprotocol.io/">Model Context Protocol (MCP)</a> inverts this. Tools are defined as a separate server that Claude connects to — the model knows what tools exist and what they do, but the application code doesn’t need to change when tools are added, modified, or swapped out. It also makes the tool layer independently testable.</p>
+<p>For a project where the data sources are likely to evolve (add an options flow feed, a macroeconomic indicator, an SEC filing index), this separation of concerns pays off quickly.</p>
+</section>
+<section id="why-duckdb-and-chromadb-together" class="level3">
+<h3 class="anchored" data-anchor-id="why-duckdb-and-chromadb-together">Why DuckDB and ChromaDB together</h3>
+<p>The two databases serve fundamentally different retrieval needs.</p>
+<p><strong>DuckDB</strong> handles structured, exact queries: <em>“Give me the 50-day and 200-day moving average for AAPL, plus trailing P/E.”</em> This is analytical SQL over tabular data — fast, precise, no ambiguity. DuckDB runs in-process with no server overhead, making it ideal for an embedded analytics layer.</p>
+<p><strong>ChromaDB</strong> handles semantic, fuzzy search: <em>“Find news about supply chain risks in the semiconductor sector from the last two weeks.”</em> Raw keyword search would miss paraphrases and related concepts; embedding-based search finds documents by meaning. ChromaDB stores pre-embedded news chunks and returns the most semantically relevant ones given any query.</p>
+<p>Using both means the agent can answer questions that require either type of retrieval — or both at once.</p>
+</section>
+<section id="how-the-agentic-loop-works" class="level3">
+<h3 class="anchored" data-anchor-id="how-the-agentic-loop-works">How the agentic loop works</h3>
+<p>The agent doesn’t follow a fixed script. Claude decides at inference time which tools to use, in what order, and whether the results are sufficient to answer the question or whether another retrieval step is needed. A multi-part question might trigger the following sequence:</p>
+<ol type="1">
+<li>Call <code>get_indicators</code> to fetch price and technical data for the ticker</li>
+<li>Observe a volatility spike in the results, decide to search for context</li>
+<li>Call <code>search_news</code> with a query derived from those results</li>
+<li>Synthesise a response that ties the numbers to the news narrative</li>
+</ol>
+<p>This capacity for dynamic, multi-step tool use — rather than a single retrieval pass — is what makes the system an <em>agent</em> rather than a retrieval-augmented chatbot.</p>
+</section>
 </section>
 <section id="try-it" class="level2">
 <h2 class="anchored" data-anchor-id="try-it">Try it</h2>
 <iframe src="https://margotbtn-finsight.hf.space" frameborder="0" width="850" height="450">
 </iframe>
 </section>
-<section id="code" class="level2">
-<h2 class="anchored" data-anchor-id="code">Code</h2>
-<p><a href="https://github.com/...">GitHub repo</a></p>
+<section id="stack" class="level2">
+<h2 class="anchored" data-anchor-id="stack">Stack</h2>
+<p><code>Python</code> · <code>Claude API (claude-sonnet-4-6)</code> · <code>MCP</code> · <code>DuckDB</code> · <code>ChromaDB</code> · <code>Gradio</code> · <code>HuggingFace Spaces</code></p>
 
 
 </section>
