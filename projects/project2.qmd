@@ -1,3 +1,36 @@
-## Project 2
+---
+title: "FinSight — Market Intelligence Agent"
+description: "An agentic RAG system for financial analysis powered by Claude"
+categories: [AI, Finance, Python]
+date: 2026-03-11
+---
 
-TODO
+## Overview
+One paragraph on what the project does and why.
+
+## Architecture
+The ASCII diagram from your README works well here, or a Mermaid diagram:
+
+```{mermaid}
+graph LR
+  U[User question] --> A[Claude claude-sonnet-4-6]
+  A -->|get_indicators| S[(DuckDB\nprices · technicals · fundamentals)]
+  A -->|search_news| R[(ChromaDB\nnews embeddings)]
+  S --> A
+  R --> A
+  A --> O[Structured analysis]
+```
+
+## Key design decisions
+- Why MCP (vs direct function calls)
+- Why DuckDB + ChromaDB together
+- How the agentic loop works
+
+## Try it
+
+<iframe src="https://huggingface.co/spaces/margotbtn/finsight"
+  width="100%" height="700px" style="border:none; border-radius:8px;">
+</iframe>
+
+## Code
+[GitHub repo](https://github.com/...)
