@@ -52,13 +52,6 @@ An agentic RAG system for financial analysis powered by Claude.
 [View project →](projects/finsight.html){.project-link}
 :::
 
-::: {.project-card}
-### Project 3
-Optional third project.
-
-[View project →](projects/project3.html){.project-link}
-:::
-
 :::
 
 <!-- =====================================================
