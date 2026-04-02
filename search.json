@@ -1,54 +1,5 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About Me",
-    "section": "",
-    "text": "I’m a data scientist working on applied ML and AI systems, currently based in Montréal. I hold a Master’s degree from Télécom SudParis (Institut Polytechnique de Paris). I enjoy building robust, practical solutions and increasingly reflecting on how data and AI are used to support meaningful, real-world decisions.\n\n\nI care a lot about:\n\nUnderstanding the context behind the data before modeling\nBuilding solutions that are robust, interpretable, and useful in practice\nCommunicating uncertainty, limitations, and trade-offs clearly\nWriting clean, reproducible code and documenting decisions\n\nThinking beyond model performance to consider downstream usage and impact\n\n\n\n\n\nBuilding end-to-end data pipelines, from raw data to deployed machine learning systems\n\nDesigning and evaluating generative AI systems, including LLM-based and retrieval-augmented approaches, for practical use cases\nCommunicating results and recommendations clearly to both technical and non-technical stakeholders\n\nContributing to projects where data supports decision-making at scale\n\n\n\n\n\nLanguages: Python, SQL\n\nData & Machine Learning: pandas, scikit-learn, PyTorch\n\nLLM-based systems: retrieval-augmented generation, LangChain\n\nMLOps & Infrastructure: Docker, Git, cloud-based workflows (GCP, AWS)\n\nVisualization: matplotlib, seaborn\n\n\n\n\nWant to learn more about my background and experience? You can find my resume below:\n Download my resume (PDF)"
-  },
-  {
-    "objectID": "about.html#how-i-approach-problems",
-    "href": "about.html#how-i-approach-problems",
-    "title": "About Me",
-    "section": "",
-    "text": "I care a lot about:\n\nUnderstanding the context behind the data before modeling\nBuilding solutions that are robust, interpretable, and useful in practice\nCommunicating uncertainty, limitations, and trade-offs clearly\nWriting clean, reproducible code and documenting decisions\n\nThinking beyond model performance to consider downstream usage and impact"
-  },
-  {
-    "objectID": "about.html#what-i-work-on",
-    "href": "about.html#what-i-work-on",
-    "title": "About Me",
-    "section": "",
-    "text": "Building end-to-end data pipelines, from raw data to deployed machine learning systems\n\nDesigning and evaluating generative AI systems, including LLM-based and retrieval-augmented approaches, for practical use cases\nCommunicating results and recommendations clearly to both technical and non-technical stakeholders\n\nContributing to projects where data supports decision-making at scale"
-  },
-  {
-    "objectID": "about.html#tools-technologies",
-    "href": "about.html#tools-technologies",
-    "title": "About Me",
-    "section": "",
-    "text": "Languages: Python, SQL\n\nData & Machine Learning: pandas, scikit-learn, PyTorch\n\nLLM-based systems: retrieval-augmented generation, LangChain\n\nMLOps & Infrastructure: Docker, Git, cloud-based workflows (GCP, AWS)\n\nVisualization: matplotlib, seaborn"
-  },
-  {
-    "objectID": "about.html#resume",
-    "href": "about.html#resume",
-    "title": "About Me",
-    "section": "",
-    "text": "Want to learn more about my background and experience? You can find my resume below:\n Download my resume (PDF)"
-  },
-  {
-    "objectID": "projects/project3.html",
-    "href": "projects/project3.html",
-    "title": "Margot Berton",
-    "section": "",
-    "text": "TODO"
-  },
-  {
-    "objectID": "projects/project3.html#project-3",
-    "href": "projects/project3.html#project-3",
-    "title": "Margot Berton",
-    "section": "",
-    "text": "TODO"
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Margot Berton | Data Scientist",
@@ -60,7 +11,7 @@
     "href": "index.html#selected-projects",
     "title": "Margot Berton | Data Scientist",
     "section": "Selected projects",
-    "text": "Selected projects\n\n\n\nShortcut Learning in NLI\nWhat if an AI could score well on a language test without actually understanding language? This project reveals how AI models pick up on subtle statistical patterns in training data — and what it means for how much we can trust their results.\nDataset bias AI Safety Distribution shift\nView project →\n\n\nFinsight\nAn agentic RAG system for financial analysis powered by Claude.\nMCP RAG Agentic AI\nView project →\n\n\nProject 3\nOptional third project.\nView project →"
+    "text": "Selected projects\n\n\n\nShortcut Learning in NLI\nWhat if an AI could score well on a language test without actually understanding language? This project reveals how AI models pick up on subtle statistical patterns in training data — and what it means for how much we can trust their results.\nDataset bias AI Safety Distribution shift\nView project →\n\n\nFinsight\nAn agentic RAG system for financial analysis powered by Claude.\nMCP RAG Agentic AI\nView project →"
   },
   {
     "objectID": "index.html#contact",
@@ -152,5 +103,40 @@
     "title": "FinSight — Market Intelligence Agent",
     "section": "Stack",
     "text": "Stack\nPython · Claude API (claude-sonnet-4-6) · MCP · DuckDB · ChromaDB · Gradio · HuggingFace Spaces"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About Me",
+    "section": "",
+    "text": "I’m a data scientist working on applied ML and AI systems, currently based in Montréal. I hold a Master’s degree from Télécom SudParis (Institut Polytechnique de Paris). I enjoy building robust, practical solutions and increasingly reflecting on how data and AI are used to support meaningful, real-world decisions.\n\n\nI care a lot about:\n\nUnderstanding the context behind the data before modeling\nBuilding solutions that are robust, interpretable, and useful in practice\nCommunicating uncertainty, limitations, and trade-offs clearly\nWriting clean, reproducible code and documenting decisions\n\nThinking beyond model performance to consider downstream usage and impact\n\n\n\n\n\nBuilding end-to-end data pipelines, from raw data to deployed machine learning systems\n\nDesigning and evaluating generative AI systems, including LLM-based and retrieval-augmented approaches, for practical use cases\nCommunicating results and recommendations clearly to both technical and non-technical stakeholders\n\nContributing to projects where data supports decision-making at scale\n\n\n\n\n\nLanguages: Python, SQL\n\nData & Machine Learning: pandas, scikit-learn, PyTorch\n\nLLM-based systems: retrieval-augmented generation, LangChain\n\nMLOps & Infrastructure: Docker, Git, cloud-based workflows (GCP, AWS)\n\nVisualization: matplotlib, seaborn\n\n\n\n\nWant to learn more about my background and experience? You can find my resume below:\n Download my resume (PDF)"
+  },
+  {
+    "objectID": "about.html#how-i-approach-problems",
+    "href": "about.html#how-i-approach-problems",
+    "title": "About Me",
+    "section": "",
+    "text": "I care a lot about:\n\nUnderstanding the context behind the data before modeling\nBuilding solutions that are robust, interpretable, and useful in practice\nCommunicating uncertainty, limitations, and trade-offs clearly\nWriting clean, reproducible code and documenting decisions\n\nThinking beyond model performance to consider downstream usage and impact"
+  },
+  {
+    "objectID": "about.html#what-i-work-on",
+    "href": "about.html#what-i-work-on",
+    "title": "About Me",
+    "section": "",
+    "text": "Building end-to-end data pipelines, from raw data to deployed machine learning systems\n\nDesigning and evaluating generative AI systems, including LLM-based and retrieval-augmented approaches, for practical use cases\nCommunicating results and recommendations clearly to both technical and non-technical stakeholders\n\nContributing to projects where data supports decision-making at scale"
+  },
+  {
+    "objectID": "about.html#tools-technologies",
+    "href": "about.html#tools-technologies",
+    "title": "About Me",
+    "section": "",
+    "text": "Languages: Python, SQL\n\nData & Machine Learning: pandas, scikit-learn, PyTorch\n\nLLM-based systems: retrieval-augmented generation, LangChain\n\nMLOps & Infrastructure: Docker, Git, cloud-based workflows (GCP, AWS)\n\nVisualization: matplotlib, seaborn"
+  },
+  {
+    "objectID": "about.html#resume",
+    "href": "about.html#resume",
+    "title": "About Me",
+    "section": "",
+    "text": "Want to learn more about my background and experience? You can find my resume below:\n Download my resume (PDF)"
   }
 ]
