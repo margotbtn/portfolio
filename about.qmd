@@ -28,10 +28,10 @@ I care a lot about:
 ## Tools & technologies
 
 - **Languages**: Python, SQL  
-- **Data & Machine Learning**: pandas, scikit-learn, PyTorch  
-- **LLM-based systems**: retrieval-augmented generation, LangChain  
-- **MLOps & Infrastructure**: Docker, Git, cloud-based workflows (GCP, AWS)  
-- **Visualization**: matplotlib, seaborn
+- **Data & Machine Learning**: Pandas, NumPy, Scikit-learn, PyTorch
+- **LLM-based systems**: RAG, LangChain, MCP, RAGAS, LangSmith
+- **MLOps & Infrastructure**: Docker, Git, cloud-based workflows (GCP, AWS), MLFlow
+- **Visualization**: Streamlit, Matplotlib, Seaborn
 
 
 ## Resume
