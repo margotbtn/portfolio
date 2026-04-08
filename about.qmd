@@ -28,9 +28,9 @@ I care a lot about:
 ## Tools & technologies
 
 - **Languages**: Python, SQL  
-- **Data & Machine Learning**: Pandas, NumPy, Scikit-learn, PyTorch
-- **LLM-based systems**: RAG, LangChain, MCP, RAGAS, LangSmith
-- **MLOps & Infrastructure**: Docker, Git, cloud-based workflows (GCP, AWS), MLFlow
+- **Data & Machine Learning**: pandas, NumPy, scikit-learn, PyTorch
+- **LLMs & GenAI**: RAG, LangChain, MCP, RAGAS, OpenAI SDK, HuggingFace (transformers)
+- **MLOps & Infrastructure**: Docker, Git, GCP, MLFlow
 - **Visualization**: Streamlit, Matplotlib, Seaborn
 
 
